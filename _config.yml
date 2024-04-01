@@ -11,29 +11,29 @@
 # SITE SETTINGS
 #
 # title appears in the header
-title: Learn-Static Lesson Template
+title: Leveraging AKS-EE and Azure IoT Operations for Manufacturing Optimization
 # title-icon appears in the header to give some pizazz (leave blank for none)
 # choose from Bootstrap Icons in _includes/bootstrap-icons
 # find names on https://icons.getbootstrap.com/ (or look in "_includes/bootstrap-icons")
 # some options: code-slash file-code gear tools lightblub book bookmark-star
-title-icon: code-slash
+title-icon:
 # description appears in sidebar footer
-description: "Create a lesson website with markdown"
+description: "Embedded World 2024 - Workshop #2"
 # keywords for meta tags used by search engines
-keywords: "workshops, websites, gh-pages, jekyll"
+keywords: "windows, kubernetes, aks-ee, containers"
 # image for meta tags, will appear when sharing link on social media
-featured-image: "/images/uidaho-workshop.jpg"
+featured-image: "/images/Jumpstart.png"
 
 # author name, displayed in credits
-author: evanwill
+author: Francisco Cabrera
 # year or date published, displayed in sidebar
-publication_year: 2022
+publication_year: 2024
 # location of code, the full url to your github repository
-source-code: https://github.com/learn-static/lesson-template
+source-code: https://github.com/fcabrera23/EW-24-Workshop2
 # content license (typically "cc by-sa"), displayed in sidebar
-content_license: "CC BY-SA"
+content_license: "MIT"
 # URL to the content license
-content_license_link: https://creativecommons.org/licenses/by-sa/4.0/
+content_license_link: https://github.com/fcabrera23/EW-24-Worksho2/?tab=MIT-1-ov-file#readme
 
 ##########
 # THEME CUSTOMIZATION [optional!]
