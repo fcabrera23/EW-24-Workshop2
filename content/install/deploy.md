@@ -44,9 +44,9 @@ In this module, you will:
 
     * Enable node level metrics to be picked up by Azure Managed Prometheus.
 
-1. In an elevated PowerShell prompt, run the `AksEdgeQuickStartForAio.ps1` script. This script brings up a K3s cluster. Replace the placeholder parameters with your own information.
+1. In an elevated PowerShell prompt, run the `AksEdgeQuickStartForAio.ps1` script. This script brings up a K3s cluster. Replace the placeholder parameters with your own information. When the script is completed, it brings up an Arc-enabled K3s cluster on your machine.
 
-    ```powerShell
+    ```powershell
    .\AksEdgeQuickStartForAio.ps1 -SubscriptionId "<SUBSCRIPTION_ID>" -TenantId "<TENANT_ID>" -ResourceGroupName "<RESOURCE_GROUP_NAME>"  -Location "<LOCATION>"  -ClusterName "<CLUSTER_NAME>"
    ```
 
@@ -59,7 +59,10 @@ In this module, you will:
    | `CLUSTER_NAME` | A name for the new connected cluster. |
    | |  | 
 
-    When the script is completed, it brings up an Arc-enabled K3s cluster on your machine.
+   For this workshop you can use the following values:
+   - **Location**: “westus2”
+   - **SubscriptionId**: “db8411db-bdc3-47bc-b51e-9a687b462c43”
+   - **TenantId**: “e177ad01-19e3-4e0c-a305-c6e6cadfe204”
 
 1. Run the following commands to check that the deployment was successful:
 

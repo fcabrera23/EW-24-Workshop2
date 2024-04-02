@@ -15,7 +15,13 @@ In this module, you will:
 | _You can deploy AKS Edge Essentials on either a single-machine or on multiple machines. In a single-machine Kubernetes deployment, both the Kubernetes control node and worker node run on the same machine. For the purpose of this lab, you will be deploying a single-machine base cluster._ | 
 | | 
 
-1.  AKS Edge Essentials cluster is deployed using a JSON scheme file. To generate a vanilla file, in Windows Terminal (**make sure you are still inside the _C:\BuildLab_ folder**), run the bellow command.
+1. Open a new Terminal session and move to the  _C:\BuildLab_ folder
+
+    ```bash
+    cd  C:\BuildLab
+    ```
+
+1.  AKS Edge Essentials cluster is deployed using a JSON scheme file. To generate a vanilla file, run the bellow command.
 
     ```powershell
     New-AksEdgeConfig -DeploymentType SingleMachineCluster -OutFile .\aksedge-config.json | Out-Null
@@ -56,13 +62,12 @@ In this module, you will:
     ```
 
     - Reserved IP start address for your Kubernetes services. This IP range must be free on your subnet.
-    - Number of reserved IP start addresses for your Kubernetes services. Based on the size, a range of free IP addresses will be allocated to your subnet.
+    - Number of reserved IP start addresses for your Kubernetes services. Based on the size, a range of free IP addresses will be allocated to your subnet. Change the `ServiceIPRangeSize` from **0** to **5**
 
     ```json
     "Init": {
-        "ServiceIPRangeStart": "192.168.10.111",
         "ServiceIPRangeSize": 5
-    }
+    },
     ```
 
     - The below settings control the environment network configuration.
@@ -75,12 +80,14 @@ In this module, you will:
     ```json
     "Network": {
         "NetworkPlugin": "flannel",
-        "ControlPlaneEndpointIp": "192.168.10.102",
-        "Ip4GatewayAddress": "192.168.10.1",
-        "Ip4PrefixLength": 24,
-        "DnsServers": [
-            "192.168.10.1"
-        ]    
+        "Ip4AddressPrefix": null,
+        "InternetDisabled": false,
+        "SkipDnsCheck": false,
+        "Proxy": {
+        "Http": null,
+        "Https": null,
+        "No": "localhost,127.0.0.0/8,192.168.0.0/16,172.17.0.0/16,10.42.0.0/16,10.43.0.0/16,10.96.0.0/12,10.244.0.0/16,.svc"
+        }
     }
     ```
 
@@ -89,17 +96,26 @@ In this module, you will:
     ```json
     "Machines": [
         {
-            "NetworkConnection": {
-            "AdapterName": "Ethernet",
-            "Mtu": 0
-            },
             "LinuxNode": {
-            "CpuCount": 2,
-            "MemoryInMB": 16384,
-            "DataSizeInGB": 20,
-            "Ip4Address": "192.168.10.101",
-            "TimeoutSeconds": 300,
-            "TpmPassthrough": false
+                "CpuCount": 4,
+                "MemoryInMB": 4096,
+                "DataSizeInGB": 10,
+                "LogSizeInGB": 1,
+                "TimeoutSeconds": 300,
+                "TpmPassthrough": false,
+                "SecondaryNetworks": [
+                {
+                    "VMSwitchName": null,
+                    "Ip4Address": null,
+                    "Ip4GatewayAddress": null,
+                    "Ip4PrefixLength": null
+                }
+                ],
+                "GpuPassthrough": {
+                "Name": null,
+                "Type": null,
+                "Count": null
+                }
             }
         }
     ]

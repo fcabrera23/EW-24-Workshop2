@@ -1,6 +1,7 @@
 ---
-section: Contoso
+section: AIO
 title: Azure IoT Operations deployment
+nav_order: 2
 ---
 
 In this module, you will:
@@ -10,11 +11,19 @@ In this module, you will:
 
 ## Instructions
 
+1. Install the Azure IoT Operations (AIO) cli extension ([azure-iot-ops](https://github.com/Azure/azure-iot-ops-cli-extension))
+
+   ```powershell
+   az extension add --upgrade --name azure-iot-ops
+   ```
+
 1. Use the Azure IoT Operations extension for Azure CLI to verify that your cluster host is configured correctly for deployment by using the [verify-host](/cli/azure/iot/ops#az-iot-ops-verify-host) command on the cluster host:
 
-    ```azurecli
+    ```powershell
     az iot ops verify-host
     ```
+
+   <img src="../../images/iot-ops-verify-host.png" alt="iot-ops-verify-host.png" width="100%" height="auto">
 
 1. Create an Azure Key Vault. Replace the placeholder parameters with your own information.
 
@@ -24,7 +33,7 @@ In this module, you will:
    | `KEYVAULT_NAME` | A name for a new key vault. |
    | | | 
 
-   ```azurecli
+   ```powershell
    az keyvault create --enable-rbac-authorization false --name "<KEYVAULT_NAME>" --resource-group "<RESOURCE_GROUP>"
    ```
 
@@ -42,7 +51,7 @@ In this module, you will:
    | `KEYVAULT_NAME` | The name of your key vault. |
    | | |
 
-   ```azurecli
+   ```powershell
    az iot ops init --simulate-plc --cluster <CLUSTER_NAME> --resource-group <RESOURCE_GROUP> --kv-id $(az keyvault show --name <KEYVAULT_NAME> -o tsv --query id)
    ```
 
@@ -53,6 +62,8 @@ In this module, you will:
    | _If you've run `az iot ops init` before, it automatically created an app registration in Microsoft Entra ID for you. You can reuse that registration rather than creating a new one each time. To use an existing app registration, add the optional parameter `--sp-app-id <APPLICATION_CLIENT_ID>`._ | 
    | | 
 
+   <img src="../../images/iot-ops-install.png" alt="iot-ops-install.png" width="100%" height="auto">
+
 1. These quickstarts use the **OPC PLC simulator** to generate sample data. To configure the simulator for the quickstart scenario, run the following command:
 
    | ℹ️ Note                                   | 
@@ -60,7 +71,7 @@ In this module, you will:
    | _Don't use the following example in production, use it for simulation and test purposes only. The example lowers the security level for the OPC PLC so that it accepts connections from any client without an explicit peer certificate trust operation._ | 
    | | 
 
-   ```azurecli
+   ```powershell
    az k8s-extension update --version 0.3.0-preview --name opc-ua-broker --release-train preview --cluster-name <CLUSTER_NAME> --resource-group <RESOURCE_GROUP> --cluster-type connectedClusters --auto-upgrade-minor-version false --config opcPlcSimulation.deploy=true --config opcPlcSimulation.autoAcceptUntrustedCertificates=true
    ```
 
@@ -70,6 +81,6 @@ In this module, you will:
 
    To view the pods on your cluster, run the following command:
 
-   ```console
+   ```powershell
    kubectl get pods -n azure-iot-operations
    ```

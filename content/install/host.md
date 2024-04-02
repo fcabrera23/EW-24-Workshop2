@@ -38,7 +38,7 @@ In this module, you will:
 
     ![2023-04-27_13-26-19.png](../../images/2023-04-27_13-26-19.png)
 
-    ```
+    ```powershell
     cd C:\BuildLab
     Set-ExecutionPolicy Bypass -Scope Process -Force
     Import-Module AksEdge
